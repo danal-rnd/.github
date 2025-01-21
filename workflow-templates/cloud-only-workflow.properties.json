@@ -1,7 +1,7 @@
 {
     "name": "GitHub Cloud only workflow",
     "description": "GitHub Cloud에서만 실행되도록 하는 Workflow template",
-    "iconName": "cloud",
+    "iconName": "octicon cloud",
     "categories": [
         "continuous-integration",
         "testing",
