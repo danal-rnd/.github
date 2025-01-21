@@ -1,0 +1,17 @@
+name: (Workflow 이름)
+
+on:
+  push:
+    branches:
+      - develop # develop branch push시 실행
+
+jobs:
+  cloud-env-check: # cloud 환경 체크용 job
+    uses: danal-rnd/check-environment-action/.github/workflows/cloud-only.yml@master
+
+  (job-name-here): # 실제 Job
+    needs: cloud-env-check # cloud 환경 체크용 job이 성공해야 돌아감.
+    runs-on: self-hosted
+    steps:
+      - name: (Steps-name-here)
+        run: echo "Write workflow commands"
