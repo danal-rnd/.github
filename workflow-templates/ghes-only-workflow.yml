@@ -1,0 +1,17 @@
+name: (Workflow 이름)
+
+on:
+  push:
+    branches:
+      - master # master branch push시 실행
+
+jobs:
+  ghes-env-check: # GHES 환경 체크용 job
+    uses: danal-rnd/check-environment-action/.github/workflows/ghes-only.yml@master
+
+  (job-name-here): # 실제 Job
+    needs: ghes-env-check # cloud 환경 체크용 job이 성공해야 돌아감.
+    runs-on: self-hosted
+    steps:
+      - name: (Steps-name-here)
+        run: echo "Write workflow commands"
