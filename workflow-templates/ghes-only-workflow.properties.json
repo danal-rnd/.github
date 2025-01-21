@@ -1,0 +1,10 @@
+{
+    "name": "GHES only workflow",
+    "description": "내부망 Github Enterprise Server에서만 실행되도록 하는 Workflow template",
+    "iconName": "octicon cloud-offline",
+    "categories": [
+        "continuous-integration",
+        "testing",
+        "deployment"
+    ]
+}
