@@ -1,0 +1,10 @@
+{
+    "name": "All env workflow",
+    "description": "하나의 파일에서 Cloud와 내부망 Github Enterprise Server에서 실행할 Job을 각각 정의하는 Workflow template",
+    "iconName": "octicon fold",
+    "categories": [
+        "continuous-integration",
+        "testing",
+        "deployment"
+    ]
+}
