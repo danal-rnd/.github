@@ -1,0 +1,9 @@
+{
+    "name": "SonarQube Scan - Maven",
+    "description": "Maven용 SonarQube 정적 분석 실행 Template",
+    "iconName": "octicon search",
+    "categories": [
+        "continuous-integration",
+        "testing"
+    ]
+}
