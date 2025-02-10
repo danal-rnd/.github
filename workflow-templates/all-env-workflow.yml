@@ -1,0 +1,27 @@
+name: (Workflow 이름)
+
+on:
+  push:
+    branches:
+      - master # master branch push시 실행
+      - develop # develop branch push시 실행
+
+jobs:
+  get-env: # 환경 이름 조회용 job
+    uses: danal-rnd/check-environment-action/.github/workflows/get-environment.yml@master
+
+  (cloud-job-name-here): # Cloud 에서 실행할 Job
+    needs: get-env
+    if: needs.get-env.outputs.ENV == 'cloud' # cloud 환경인 경우 실행
+    runs-on: self-hosted
+    steps:
+      - name: (Steps-name-here)
+        run: echo "Write workflow commands"
+
+  (ghes-job-name-here): # GHES 에서 실행할 Job
+    needs: get-env
+    if: needs.get-env.outputs.ENV == 'ghes' # GHES 환경인 경우 실행
+    runs-on: self-hosted
+    steps:
+      - name: (Steps-name-here)
+        run: echo "Write workflow commands"
