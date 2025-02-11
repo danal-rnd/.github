@@ -1,0 +1,37 @@
+name: (Workflow 이름)
+on:
+  push:
+    branches:
+      - master # master branch push시 실행
+  pull_request:
+    types: [opened, synchronize, reopened] # PR 생성시 실행 (Bot이 PR에 분석 결과를 comment)
+  workflow_dispatch: # 수동으로 실행
+
+jobs:
+  cloud-env-check: # cloud 환경 체크용 job
+    uses: danal-rnd/check-environment-action/.github/workflows/cloud-only.yml@master
+    
+  sonarqube-scan:
+    needs: cloud-env-check # cloud 에서만 실행
+    runs-on: self-hosted
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Set up JDK 17 # Java 세팅 step
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'corretto'
+
+      - uses: actions/checkout@v4 # Code checkout
+        with:
+          fetch-depth: 0
+
+      - name: Build and analyze # [중요] secrets.SONAR_PROJECT_KEY 추가, build.gradle에 plugin(id "org.sonarqube" version "6.0.1.5171") 추가 필요
+        env:
+          SONAR_TOKEN: ${{ secrets.ORG_SONARQUBE_TOKEN }} # SonarQube global 토큰 (추가 불필요)
+          SONAR_HOST_URL: ${{ secrets.SONARQUBE_URL }} # SonarQube URL (추가 불필요)
+        run: |
+          chmod +x ./gradlew
+          ./gradlew build sonar -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.projectName=${{ github.event.repository.name }}
