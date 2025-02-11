@@ -4,7 +4,7 @@ on:
     branches:
       - master # master branch push시 실행
   pull_request:
-    types: [opened, synchronize, reopened] # PR 생성시 실행
+    types: [opened, synchronize, reopened] # PR 생성시 실행 (PR에 bot이 분석 결과를 comment 해줌)
   workflow_dispatch: # 수동으로 실행
 
 jobs:
