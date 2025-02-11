@@ -18,7 +18,13 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Set up JDK 17 # Java 세팅 step
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'corretto'
+
+      - uses: actions/checkout@v4 # Code checkout
         with:
           fetch-depth: 0
 
