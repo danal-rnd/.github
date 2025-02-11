@@ -1,0 +1,9 @@
+{
+    "name": "SonarQube Scan - Gradle",
+    "description": "Gradle SonarQube 정적 분석 실행 Template",
+    "iconName": "octicon search",
+    "categories": [
+        "continuous-integration",
+        "testing"
+    ]
+}
