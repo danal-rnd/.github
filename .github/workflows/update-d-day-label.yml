@@ -1,0 +1,26 @@
+name: Update D-n Labels
+on:
+  schedule:
+    - cron: '0 15 * * *' # 매일 밤 12시에 실행 (KST 기준, UTC 기준 15시)
+  workflow_dispatch:
+
+jobs:
+  cloud-env-check: # cloud 환경 체크용 job
+    uses: danal-rnd/check-environment-action/.github/workflows/cloud-only.yml@master
+
+  d-day-labeler:
+    needs: cloud-env-check # cloud 환경 체크용 job이 성공해야 돌아감.
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Setup octokit
+        run: npm install @octokit/rest
+      - name: Update D-Day Labels
+        env:
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: node ./.github/scripts/update-d-day-label.mjs
