@@ -1,0 +1,8 @@
+{
+    "name": "XEIZE SAST PR SCAN",
+    "description": "XEIZE PR 정적 분석 실행 Template",
+    "iconName": "octicon codescan",
+    "categories": [
+        "continuous-integration"
+    ]
+}

@@ -1,0 +1,10 @@
+name: XEIZE SAST PR SCAN
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened] # PR시 실행
+
+jobs:
+  xeize-scan-pr:
+    uses: danal-rnd/xeize-action/.github/workflows/xeize-scan-cloud.yml@master
+    secrets: inherit
